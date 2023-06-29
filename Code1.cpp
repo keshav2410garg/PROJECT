@@ -69,18 +69,8 @@ class LRUCache{
             return NULL;
         }
 
-        int* MostRecentKey(string key){
-            if(m.count(key)!=0){
-                auto it=m[key];
-                int value=it->value;
-                l.push_front(*it);
-                l.erase(it);
-                m[key]=l.begin();
-                return &l.begin()->value;
-            }
-
-
-            return NULL;
+        int MostRecentKey(){
+            return l.front().value;
         }
 };
 
@@ -91,11 +81,24 @@ int main(){
     lru.InsertKeYValue("apple",20);
     lru.InsertKeYValue("guava",30);
     cout<<lru.MostRecentKey()<<endl;
-
+    cout<<*(lru.getValue("Mango"))<<endl;
 
     lru.InsertKeYValue("Mango",40);
     cout<<lru.MostRecentKey()<<endl;
 
     lru.InsertKeYValue("Banana",20);
+
+    if(lru.getValue("apple")==NULL){
+        cout<<"apple does not exist"<<endl;
+    }
+    if(lru.getValue("guava")==NULL){
+        cout<<"guava does not exist"<<endl;
+    }
+    if(lru.getValue("banana")==NULL){
+        cout<<"banana does not exist"<<endl;
+    }
+    if(lru.getValue("Mango")==NULL){
+        cout<<"Mango does not exist"<<endl;
+    }
 
 }
