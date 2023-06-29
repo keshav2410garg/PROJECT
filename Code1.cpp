@@ -69,7 +69,33 @@ class LRUCache{
             return NULL;
         }
 
-        string MostRecentKey(){
+        int* MostRecentKey(string key){
+            if(m.count(key)!=0){
+                auto it=m[key];
+                int value=it->value;
+                l.push_front(*it);
+                l.erase(it);
+                m[key]=l.begin();
+                return &l.begin()->value;
+            }
 
+
+            return NULL;
         }
 };
+
+
+int main(){
+    LRUCache lru(3);
+    lru.InsertKeYValue("Mango",10);
+    lru.InsertKeYValue("apple",20);
+    lru.InsertKeYValue("guava",30);
+    cout<<lru.MostRecentKey()<<endl;
+
+
+    lru.InsertKeYValue("Mango",40);
+    cout<<lru.MostRecentKey()<<endl;
+
+    lru.InsertKeYValue("Banana",20);
+
+}
